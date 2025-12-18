@@ -49,6 +49,40 @@ Croppie is a fast, easy to use image cropping plugin with tons of configuration 
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 ````
 
+**Note:** If the toolbar is being covered by the status bar, you need to use a custom theme that properly handles the status bar. 
+
+1. Create or update a theme file in your app's `android/app/src/main/res/values/themes.xml` (or `styles.xml`):
+
+````xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="UCropTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>
+````
+
+2. Then update your AndroidManifest.xml to use this theme:
+
+````xml
+<activity
+    android:name="com.yalantis.ucrop.UCropActivity"
+    android:screenOrientation="portrait"
+    android:theme="@style/UCropTheme"/>
+````
+
+Alternatively, you can also set the `statusBarColor` in `AndroidUiSettings` to ensure proper status bar handling:
+
+````dart
+AndroidUiSettings(
+  toolbarColor: Colors.deepOrange,
+  statusBarColor: Colors.deepOrange.shade900, // Set status bar color
+  // ... other settings
+)
+````
+
 #### Note:
 From v1.2.0, you need to migrate your android project to v2 embedding ([detail](https://github.com/flutter/flutter/wiki/Upgrading-pre-1.12-Android-projects))
 
