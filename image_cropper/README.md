@@ -138,6 +138,7 @@ From v1.2.0, you need to migrate your android project to v2 embedding ([detail](
 | `lockAspectRatio`           | set to true if you want to lock the aspect ratio of crop bounds with a fixed value (locked by default)      | bool                  |
 | `hideBottomControls`        | set to true to hide the bottom controls (shown by default)                                                  | bool                  |
 | `initAspectRatio`           | desired aspect ratio is applied (from the list of given aspect ratio presets) when starting the cropper     | CropAspectRatioPreset |
+| `maxBitmapSize`             | maximum size in pixels for the bitmap to be loaded. Setting a smaller value creates more space around the crop area | int                   |
 
 </details>
 
