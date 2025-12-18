@@ -1,0 +1,5 @@
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <item name="com.yalantis.ucrop.R.layout.ucrop_view" type="layout" tools:override="true">@layout/custom_view</item>
+    <item name="ucrop_view" type="layout" tools:override="true">@layout/custom_view</item>
+</resources>
