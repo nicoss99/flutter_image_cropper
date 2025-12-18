@@ -49,9 +49,11 @@ Croppie is a fast, easy to use image cropping plugin with tons of configuration 
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 ````
 
-**Note:** If the toolbar is being covered by the status bar, you need to use a custom theme that properly handles the status bar. 
+**⚠️ IMPORTANT: Fixing Status Bar Overlap Issue**
 
-1. Create or update a theme file in your app's `android/app/src/main/res/values/themes.xml` (or `styles.xml`):
+If the toolbar is being covered by the status bar, you **MUST** update your AndroidManifest.xml to use a custom theme. This is a required step and cannot be fixed programmatically.
+
+**Step 1:** Create or update a theme file in your app's `android/app/src/main/res/values/themes.xml` (create the file if it doesn't exist):
 
 ````xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -60,11 +62,12 @@ Croppie is a fast, easy to use image cropping plugin with tons of configuration 
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 </resources>
 ````
 
-2. Then update your AndroidManifest.xml to use this theme:
+**Step 2:** Update your `android/app/src/main/AndroidManifest.xml` to use this theme:
 
 ````xml
 <activity
@@ -73,15 +76,19 @@ Croppie is a fast, easy to use image cropping plugin with tons of configuration 
     android:theme="@style/UCropTheme"/>
 ````
 
-Alternatively, you can also set the `statusBarColor` in `AndroidUiSettings` to ensure proper status bar handling:
+**Step 3:** Also set the `statusBarColor` in your `AndroidUiSettings` to match your toolbar:
 
 ````dart
 AndroidUiSettings(
+  toolbarTitle: 'Cropper',
   toolbarColor: Colors.deepOrange,
-  statusBarColor: Colors.deepOrange.shade900, // Set status bar color
+  statusBarColor: Colors.deepOrange.shade900, // IMPORTANT: Set this!
+  toolbarWidgetColor: Colors.white,
   // ... other settings
 )
 ````
+
+**Note:** All three steps are required. The theme in AndroidManifest is essential and cannot be skipped.
 
 #### Note:
 From v1.2.0, you need to migrate your android project to v2 embedding ([detail](https://github.com/flutter/flutter/wiki/Upgrading-pre-1.12-Android-projects))

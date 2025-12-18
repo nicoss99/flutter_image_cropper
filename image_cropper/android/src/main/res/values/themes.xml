@@ -6,6 +6,12 @@
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+    
+    <!-- Alternative theme for API 21+ with better status bar handling -->
+    <style name="UCropTheme.V21" parent="UCropTheme">
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
 

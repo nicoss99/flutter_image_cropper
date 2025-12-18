@@ -179,10 +179,16 @@ public class ImageCropperDelegate implements PluginRegistry.ActivityResultListen
         if (toolbarColor != null) {
             options.setToolbarColor(toolbarColor);
         }
+        // Always set status bar color to prevent overlap issues
+        // This ensures UCrop properly handles the status bar
         if (statusBarColor != null) {
             options.setStatusBarColor(statusBarColor);
         } else if (toolbarColor != null) {
             options.setStatusBarColor(darkenColor(toolbarColor));
+        } else {
+            // Set a default dark status bar color to ensure proper layout
+            // This prevents the status bar from being transparent and covering the toolbar
+            options.setStatusBarColor(Color.parseColor("#CC000000")); // Semi-transparent black
         }
         if (toolbarWidgetColor != null) {
             options.setToolbarWidgetColor(toolbarWidgetColor);
